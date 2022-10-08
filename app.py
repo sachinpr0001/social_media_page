@@ -1,24 +1,37 @@
+"""flask app
+
+Returns:
+    html: index
+"""
 from flask import Flask, render_template, request
 from flask_cors import CORS
 from models import create_post, get_posts
+
 app = Flask(__name__)
 
 CORS(app)
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route("/", methods=["GET", "POST"])
 def index():
+    """function for routing
 
-	if request.method == 'GET':
-		pass
+    Returns:
+        _type_: _description_
+    """
 
-	if request.method == 'POST':
-		name = request.form.get('name')
-		post = request.form.get('post')
-		create_post(name, post)
+    if request.method == "GET":
+        pass
 
-	posts = get_posts()
+    if request.method == "POST":
+        name = request.form.get("name")
+        post = request.form.get("post")
+        create_post(name, post)
 
-	return render_template('index.html', posts=posts)
+    posts = get_posts()
 
-if __name__ == '__main__':
-	app.run(debug=True)
+    return render_template("index.html", posts=posts)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
